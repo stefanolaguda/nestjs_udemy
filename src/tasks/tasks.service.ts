@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TasksRepository } from './tasks.repository';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -56,7 +56,7 @@ export class TasksService {
     return this.tasksRepository.createTask(createTaskDto);
   }
 
-  deleteTask(id: string): Promise<Task> {
+  deleteTask(id: string): Promise<void> {
     return this.tasksRepository.deleteTask(id);
   }
   // deleteTask(id: string): TaskModel[] {
