@@ -9,7 +9,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import { TaskModel, TaskStatus } from './task-model.interface';
+import { TaskModel } from './task-model.interface';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilter } from './dto/get-tasks-filter.dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
