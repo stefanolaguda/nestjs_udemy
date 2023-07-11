@@ -1,8 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { TaskStatus } from './task-status.enum';
-import { v4 as uuid } from 'uuid';
 import { CreateTaskDto } from './dto/create-task.dto';
-import { GetTasksFilter } from './dto/get-tasks-filter.dto';
 import { TasksRepository } from './tasks.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './dto/task.entity';
@@ -41,37 +38,27 @@ export class TasksService {
   //   return tasks;
   // }
 
-  async getTaskById(id: string): Promise<Task> {
-    const found = await this.tasksRepository.findOne({ where: { id } });
+  // async getTaskById(id: string): Promise<Task> {
+  //   const found = await this.tasksRepository.findOne({ where: { id } });
 
-    if (!found) {
-      throw new NotFoundException(`Task with ID "${id}" not found`);
-    }
-
-    return found;
-  }
-  // getSingleTask(id: string): TaskModel {
-  //   const foundTask = this.tasks.find((task) => task.id === id);
-  //   if (!foundTask) {
+  //   if (!found) {
   //     throw new NotFoundException(`Task with ID "${id}" not found`);
-  //   } else {
-  //     return this.tasks.find((task) => task.id === id);
   //   }
+
+  //   return found;
   // }
-  // createTask(createTaskDto: CreateTaskDto): TaskModel {
-  //   const { title, description } = createTaskDto;
 
-  //   const task: TaskModel = {
-  //     id: uuid(),
-  //     title,
-  //     description,
-  //     status: TaskStatus.OPEN,
-  //   };
+  getTaskById(id: string): Promise<Task> {
+    return this.tasksRepository.getTaskById(id);
+  }
 
-  //   this.tasks.push(task);
+  createTask(createTaskDto: CreateTaskDto): Promise<Task> {
+    return this.tasksRepository.createTask(createTaskDto);
+  }
 
-  //   return task;
-  // }
+  deleteTask(id: string): Promise<Task> {
+    return this.tasksRepository.deleteTask(id);
+  }
   // deleteTask(id: string): TaskModel[] {
   //   const foundTask = this.getSingleTask(id);
   //   return (this.tasks = this.tasks.filter((task) => task.id !== foundTask.id));
